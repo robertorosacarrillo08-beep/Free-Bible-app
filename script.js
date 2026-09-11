@@ -44,6 +44,14 @@ const BibleApp = (() => {
         otros: 'Otros'
     };
 
+    const categoryLookup = Object.fromEntries(
+        Object.entries(categories).flatMap(([, groups]) =>
+            Object.entries(groups).flatMap(([categoryKey, ids]) =>
+                ids.map(id => [id, categoryKey])
+            )
+        )
+    );
+
     let biblePromise;
 
     function getBibleXmlPath() {
@@ -74,7 +82,7 @@ const BibleApp = (() => {
         const grouped = {};
         books.forEach(book => {
             const bookId = book.getAttribute('id');
-            const categoryKey = Object.entries(categories[testamentKey]).find(([, ids]) => ids.includes(bookId))?.[0] || 'otros';
+            const categoryKey = categoryLookup[bookId] || 'otros';
             if (!grouped[categoryKey]) {
                 grouped[categoryKey] = [];
             }
