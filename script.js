@@ -145,7 +145,7 @@ const BibleApp = (() => {
                         category.className = 'book-category';
 
                         const heading = document.createElement('h3');
-                        heading.textContent = categoryLabels[categoryKey];
+                        heading.textContent = categoryLabels[categoryKey] || categoryLabels.otros;
                         category.appendChild(heading);
 
                         const list = document.createElement('ul');
@@ -255,6 +255,9 @@ const BibleApp = (() => {
                 }
 
                 chapterSelect.onchange = event => {
+                    if (!event.target.value) {
+                        return;
+                    }
                     const chapter = chapters.find(item => item.getAttribute('number') === event.target.value);
                     renderChapter(bookName, chapter, versesContainer);
                 };
