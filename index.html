@@ -90,7 +90,7 @@
                     if (!container) {
                         continue;
                     }
-                    container.innerHTML = '';
+                    container.replaceChildren();
 
                     const books = Array.from(testament.getElementsByTagName('book')).map(book => ({
                         id: book.getAttribute('id') || '',
