@@ -43,6 +43,10 @@ const BibleApp = (() => {
         profecia: 'Profecía',
         otros: 'Otros'
     };
+    const initialDocumentTitle = document.title;
+    const siteTitle = initialDocumentTitle.includes(' - ')
+        ? initialDocumentTitle.split(' - ').pop()
+        : initialDocumentTitle;
 
     const categoryLookup = Object.fromEntries(
         Object.entries(categories).flatMap(([, groups]) =>
@@ -118,6 +122,10 @@ const BibleApp = (() => {
                     'Antiguo Testamento': document.getElementById('old-testament-books'),
                     'Nuevo Testamento': document.getElementById('new-testament-books')
                 };
+                const bookCounts = {
+                    'Antiguo Testamento': 0,
+                    'Nuevo Testamento': 0
+                };
 
                 Array.from(xmlDoc.getElementsByTagName('testament')).forEach(testament => {
                     const testamentName = testament.getAttribute('name');
@@ -133,6 +141,7 @@ const BibleApp = (() => {
                         return;
                     }
 
+                    bookCounts[testamentName] = books.length;
                     const groups = groupBooks(books);
                     const fragment = document.createDocumentFragment();
                     const orderedCategoryKeys = [
@@ -157,12 +166,88 @@ const BibleApp = (() => {
 
                     testamentSections[testamentName].replaceChildren(fragment);
                 });
+
+                updateHomeStats(bookCounts);
+                setupBookSearch();
             })
             .catch(error => {
                 console.error('Error cargando XML:', error);
                 renderError(document.getElementById('old-testament-books'), 'No fue posible cargar los libros en este momento.');
                 renderError(document.getElementById('new-testament-books'), 'No fue posible cargar los libros en este momento.');
             });
+    }
+
+    function updateHomeStats(bookCounts) {
+        const oldCount = bookCounts['Antiguo Testamento'] || 0;
+        const newCount = bookCounts['Nuevo Testamento'] || 0;
+        const totalCount = oldCount + newCount;
+
+        const totalBooks = document.getElementById('total-books');
+        const oldBooks = document.getElementById('old-books-count');
+        const newBooks = document.getElementById('new-books-count');
+
+        if (totalBooks) {
+            totalBooks.textContent = totalCount;
+        }
+        if (oldBooks) {
+            oldBooks.textContent = oldCount;
+        }
+        if (newBooks) {
+            newBooks.textContent = newCount;
+        }
+    }
+
+    function setupBookSearch() {
+        const searchInput = document.getElementById('book-search');
+        if (!searchInput || searchInput.dataset.initialized === 'true') {
+            return;
+        }
+
+        searchInput.dataset.initialized = 'true';
+        searchInput.addEventListener('input', event => {
+            filterBookCategories(event.target.value);
+        });
+    }
+
+    function filterBookCategories(query) {
+        const normalizedQuery = query.trim().toLowerCase();
+        const sections = [
+            {
+                grid: document.getElementById('old-testament-books'),
+                emptyState: document.getElementById('old-empty-state')
+            },
+            {
+                grid: document.getElementById('new-testament-books'),
+                emptyState: document.getElementById('new-empty-state')
+            }
+        ];
+
+        sections.forEach(section => {
+            if (!section.grid) {
+                return;
+            }
+
+            let visibleCategories = 0;
+            Array.from(section.grid.querySelectorAll('.book-category')).forEach(category => {
+                let visibleBooks = 0;
+                Array.from(category.querySelectorAll('li')).forEach(item => {
+                    const matches = item.textContent.toLowerCase().includes(normalizedQuery);
+                    item.hidden = !matches;
+                    if (matches) {
+                        visibleBooks += 1;
+                    }
+                });
+
+                category.classList.toggle('hidden', visibleBooks === 0);
+                if (visibleBooks > 0) {
+                    visibleCategories += 1;
+                }
+            });
+
+            if (section.emptyState) {
+                section.emptyState.hidden = visibleCategories > 0;
+            }
+        });
     }
 
     function getRequestedBookId() {
@@ -229,7 +314,7 @@ const BibleApp = (() => {
                 const chapters = Array.from(book.getElementsByTagName('chapter'));
                 const totalChapters = chapters.length;
 
-                document.title = `${bookName} - Free Bible App`;
+                document.title = `${bookName} - ${siteTitle}`;
                 bookTitle.textContent = bookName;
                 bookInfo.textContent = `Total de capítulos: ${totalChapters}`;
                 chapterSelect.replaceChildren();

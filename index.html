@@ -12,6 +12,36 @@
             <h1>📖 Free Bible App</h1>
             <p>Tu acceso gratuito a la Biblia en cualquier momento y lugar</p>
         </header>
+        <section class="home-hero">
+            <div>
+                <span class="hero-badge">Lectura en línea</span>
+                <h2>Explora la Biblia por libro y capítulo</h2>
+                <p>Encuentra rápidamente el libro que buscas y continúa tu lectura desde una sola página principal.</p>
+            </div>
+            <div class="hero-actions">
+                <a href="book.html?id=genesis" class="hero-link">Comenzar en Génesis</a>
+            </div>
+        </section>
+        <section class="home-tools">
+            <div class="search-card">
+                <label for="book-search">Buscar libro:</label>
+                <input id="book-search" type="search" placeholder="Escribe un libro de la Biblia" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <strong id="total-books">0</strong>
+                    <span>Libros</span>
+                </div>
+                <div class="stat-card">
+                    <strong id="old-books-count">0</strong>
+                    <span>Antiguo Testamento</span>
+                </div>
+                <div class="stat-card">
+                    <strong id="new-books-count">0</strong>
+                    <span>Nuevo Testamento</span>
+                </div>
+            </div>
+        </section>
         <div class="tabs">
             <button class="tab-button active" onclick="showTestament('old')">Antiguo Testamento</button>
             <button class="tab-button" onclick="showTestament('new')">Nuevo Testamento</button>
@@ -19,10 +49,12 @@
         <section id="old-testament" class="testament-section active">
             <h2>Antiguo Testamento</h2>
             <div class="books-grid" id="old-testament-books"></div>
+            <p id="old-empty-state" class="empty-state" hidden>No se encontraron libros con esa búsqueda.</p>
         </section>
         <section id="new-testament" class="testament-section">
             <h2>Nuevo Testamento</h2>
             <div class="books-grid" id="new-testament-books"></div>
+            <p id="new-empty-state" class="empty-state" hidden>No se encontraron libros con esa búsqueda.</p>
         </section>
     </div>
     <script src="script.js"></script>

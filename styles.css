@@ -32,6 +32,101 @@ header p {
     font-size: 1.1em;
     opacity: 0.9;
 }
+.home-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 20px 20px;
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.08), rgba(255, 255, 255, 0));
+}
+.home-hero h2 {
+    color: #4c5fd5;
+    margin: 10px 0;
+    font-size: 2rem;
+}
+.home-hero p {
+    max-width: 700px;
+    color: #555;
+    line-height: 1.6;
+}
+.hero-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(102, 126, 234, 0.12);
+    color: #4c5fd5;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.hero-actions {
+    display: flex;
+    align-items: center;
+}
+.hero-link {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);
+}
+.hero-link:hover {
+    background: #556ee6;
+}
+.home-tools {
+    display: grid;
+    grid-template-columns: minmax(260px, 1.2fr) minmax(280px, 1fr);
+    gap: 20px;
+    padding: 0 20px 25px;
+}
+.search-card,
+.stat-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.search-card {
+    padding: 20px;
+}
+.search-card label {
+    display: block;
+    margin-bottom: 10px;
+    color: #667eea;
+    font-weight: 600;
+}
+.search-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d8dcf4;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+.search-card input:focus {
+    outline: 2px solid rgba(102, 126, 234, 0.25);
+    border-color: #667eea;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+.stat-card {
+    padding: 20px 15px;
+    text-align: center;
+}
+.stat-card strong {
+    display: block;
+    color: #4c5fd5;
+    font-size: 2rem;
+    margin-bottom: 6px;
+}
+.stat-card span {
+    color: #666;
+    font-size: 0.95rem;
+}
 .tabs {
     display: flex;
     background: #f5f5f5;
@@ -109,4 +204,29 @@ header p {
 .book-category a {
     color: #333;
     text-decoration: none;
+}
+.book-category.hidden {
+    display: none;
+}
+.empty-state {
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
+}
+@media (max-width: 900px) {
+    .home-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .home-tools {
+        grid-template-columns: 1fr;
+    }
+    .stats-grid {
+        width: 100%;
+    }
+}
+@media (max-width: 640px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 }
