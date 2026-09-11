@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-redirect-target="../book.html?id=genesis">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Génesis - Free Bible App</title>
     <link rel="stylesheet" href="../styles.css">
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            window.setTimeout(() => {
-                window.location.replace('../book.html?id=genesis');
-            }, 150);
-        });
-    </script>
     <noscript>
         <meta http-equiv="refresh" content="1; url=../book.html?id=genesis">
     </noscript>
@@ -23,12 +16,16 @@
             <p>Tu acceso gratuito a la Biblia en cualquier momento y lugar</p>
         </header>
         <div style="padding: 20px;">
-            <a href="../book.html?id=genesis" class="back-link">Continuar a Génesis</a>
+            <a id="legacy-redirect-link" href="../book.html?id=genesis" class="back-link">Continuar a Génesis</a>
         </div>
         <div class="book-content">
-            <p>Redirigiendo a la lectura de Génesis...</p>
+            <p id="legacy-redirect-message">Redirigiendo a la lectura de Génesis...</p>
             <noscript><p>Si la redirección no ocurre automáticamente, usa el enlace anterior.</p></noscript>
         </div>
     </div>
+    <script src="../script.js"></script>
+    <script>
+        BibleApp.renderLegacyRedirect();
+    </script>
 </body>
 </html>

@@ -211,7 +211,7 @@ const BibleApp = (() => {
     }
 
     function filterBookCategories(query) {
-        const normalizedQuery = query.trim().toLowerCase();
+        const normalizedQuery = normalizeSearchText(query);
         const sections = [
             {
                 grid: document.getElementById('old-testament-books'),
@@ -232,7 +232,7 @@ const BibleApp = (() => {
             Array.from(section.grid.querySelectorAll('.book-category')).forEach(category => {
                 let visibleBooks = 0;
                 Array.from(category.querySelectorAll('li')).forEach(item => {
-                    const matches = item.textContent.toLowerCase().includes(normalizedQuery);
+                    const matches = normalizeSearchText(item.textContent).includes(normalizedQuery);
                     item.hidden = !matches;
                     if (matches) {
                         visibleBooks += 1;
@@ -249,6 +249,14 @@ const BibleApp = (() => {
                 section.emptyState.hidden = visibleCategories > 0;
             }
         });
+    }
+
+    function normalizeSearchText(text) {
+        return text
+            .trim()
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
     }
 
     function getRequestedBookId() {
@@ -305,6 +313,11 @@ const BibleApp = (() => {
             .then(xmlDoc => {
                 const book = Array.from(xmlDoc.getElementsByTagName('book')).find(item => item.getAttribute('id') === bookId);
                 if (!book) {
+                    chapterSelect.replaceChildren();
+                    const placeholderOption = document.createElement('option');
+                    placeholderOption.value = '';
+                    placeholderOption.textContent = '-- Selecciona un capítulo --';
+                    chapterSelect.appendChild(placeholderOption);
                     document.title = `Libro no encontrado - ${siteTitle}`;
                     bookTitle.textContent = 'Libro no encontrado';
                     bookInfo.textContent = 'Verifica el enlace e intenta nuevamente.';
@@ -357,10 +370,30 @@ const BibleApp = (() => {
             });
     }
 
+    function renderLegacyRedirect() {
+        const redirectTarget = document.documentElement.dataset.redirectTarget;
+        const redirectLink = document.getElementById('legacy-redirect-link');
+        const statusMessage = document.getElementById('legacy-redirect-message');
+
+        if (!redirectTarget || !redirectLink || !statusMessage) {
+            return;
+        }
+
+        redirectLink.href = redirectTarget;
+        statusMessage.textContent = 'Redirigiendo a la lectura del libro...';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            window.setTimeout(() => {
+                window.location.replace(redirectTarget);
+            }, 150);
+        });
+    }
+
     return {
         loadBible,
         renderIndex,
-        renderBookPage
+        renderBookPage,
+        renderLegacyRedirect
     };
 })();
 
