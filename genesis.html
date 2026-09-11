@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Génesis - Free Bible App</title>
     <link rel="stylesheet" href="styles.css">
-    <meta http-equiv="refresh" content="0; url=book.html?id=genesis">
     <script>
-        window.location.replace('book.html?id=genesis');
+        window.addEventListener('DOMContentLoaded', () => {
+            window.setTimeout(() => {
+                window.location.replace('book.html?id=genesis');
+            }, 150);
+        });
     </script>
 </head>
 <body>
@@ -18,6 +21,9 @@
         </header>
         <div style="padding: 20px;">
             <a href="book.html?id=genesis" class="back-link">Continuar a Génesis</a>
+        </div>
+        <div class="book-content">
+            <p>Redirigiendo a la lectura de Génesis...</p>
         </div>
     </div>
 </body>

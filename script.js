@@ -227,7 +227,7 @@ const BibleApp = (() => {
 
                 const bookName = book.getAttribute('name');
                 const chapters = Array.from(book.getElementsByTagName('chapter'));
-                const totalChapters = chapters.length || Number(book.getAttribute('chapters')) || 0;
+                const totalChapters = chapters.length;
 
                 document.title = `${bookName} - Free Bible App`;
                 bookTitle.textContent = bookName;
