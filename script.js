@@ -64,17 +64,18 @@ const BibleApp = (() => {
 
     function loadBible() {
         if (!biblePromise) {
-            biblePromise = fetch(getBibleXmlPath())
+            const xmlPath = getBibleXmlPath();
+            biblePromise = fetch(xmlPath)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error(`No se pudo cargar ${getBibleXmlPath()}`);
+                        throw new Error(`No se pudo cargar ${xmlPath}`);
                     }
                     return response.text();
                 })
                 .then(xmlText => {
                     const xmlDoc = new DOMParser().parseFromString(xmlText, 'application/xml');
                     if (xmlDoc.querySelector('parsererror')) {
-                        throw new Error('El archivo bible.xml no es válido.');
+                        throw new Error(`El archivo ${xmlPath} no es válido.`);
                     }
                     return xmlDoc;
                 });
@@ -304,6 +305,7 @@ const BibleApp = (() => {
             .then(xmlDoc => {
                 const book = Array.from(xmlDoc.getElementsByTagName('book')).find(item => item.getAttribute('id') === bookId);
                 if (!book) {
+                    document.title = `Libro no encontrado - ${siteTitle}`;
                     bookTitle.textContent = 'Libro no encontrado';
                     bookInfo.textContent = 'Verifica el enlace e intenta nuevamente.';
                     renderError(versesContainer, 'No existe contenido disponible para este libro.');
