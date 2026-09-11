@@ -72,10 +72,20 @@ header p {
     border-bottom-color: #6179ea;
 }
 
-.tab-button:focus,
 .tab-button:focus-visible {
     outline: 3px solid #6179ea;
     outline-offset: 2px;
+}
+
+.tab-button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+@supports not selector(:focus-visible) {
+    .tab-button:focus {
+        outline: 3px solid #6179ea;
+        outline-offset: 2px;
+    }
 }
 
 .testament-section {
