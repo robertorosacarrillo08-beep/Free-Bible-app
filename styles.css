@@ -72,6 +72,11 @@ header p {
     border-bottom-color: #6179ea;
 }
 
+.tab-button:focus-visible {
+    outline: 3px solid #6179ea;
+    outline-offset: -3px;
+}
+
 .testament-section {
     display: none;
     padding: 58px 20px 36px;
