@@ -74,7 +74,7 @@ header p {
 
 .tab-button:focus-visible {
     outline: 3px solid #6179ea;
-    outline-offset: -3px;
+    outline-offset: 2px;
 }
 
 .testament-section {
