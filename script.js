@@ -1,18 +1,8 @@
-// Función para cambiar entre testamentos
 function showTestament(testament) {
-    // Ocultar todas las secciones
     const sections = document.querySelectorAll('.testament-section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
-
-    // Remover clase activa de todos los botones
+    sections.forEach(section => section.classList.remove('active'));
     const buttons = document.querySelectorAll('.tab-button');
-    buttons.forEach(button => {
-        button.classList.remove('active');
-    });
-
-    // Mostrar la sección seleccionada
+    buttons.forEach(button => button.classList.remove('active'));
     if (testament === 'old') {
         document.getElementById('old-testament').classList.add('active');
         buttons[0].classList.add('active');

@@ -8,105 +8,51 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header>
             <h1>📖 Free Bible App</h1>
             <p>Tu acceso gratuito a la Biblia en cualquier momento y lugar</p>
         </header>
-
-        <!-- Tabs for Testament Selection -->
         <div class="tabs">
             <button class="tab-button active" onclick="showTestament('old')">Antiguo Testamento</button>
             <button class="tab-button" onclick="showTestament('new')">Nuevo Testamento</button>
         </div>
-
-        <!-- Antiguo Testamento Section -->
         <section id="old-testament" class="testament-section active">
             <h2>Antiguo Testamento</h2>
             <div class="books-grid" id="old-testament-books"></div>
         </section>
-
-        <!-- Nuevo Testamento Section -->
         <section id="new-testament" class="testament-section">
             <h2>Nuevo Testamento</h2>
             <div class="books-grid" id="new-testament-books"></div>
         </section>
     </div>
-
     <script src="script.js"></script>
     <script>
-        // Cargar XML y mostrar libros
         fetch('bible.xml')
             .then(response => response.text())
             .then(xmlText => {
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-                
                 const testaments = xmlDoc.getElementsByTagName('testament');
-                
                 for (let testament of testaments) {
                     const testamentName = testament.getAttribute('name');
                     const books = testament.getElementsByTagName('book');
                     let booksHTML = '';
-                    
-                    // Agrupar libros por categorías
                     const booksByCategory = {};
-                    
                     for (let book of books) {
                         const bookId = book.getAttribute('id');
                         const bookName = book.getAttribute('name');
-                        
-                        // Determinar categoría basada en el nombre del libro
                         let category = 'Otros';
-                        
                         if (testamentName === 'Antiguo Testamento') {
-                            if (['genesis', 'exodo', 'levitico', 'numeros', 'deuteronomio'].includes(bookId)) {
-                                category = 'Pentateuco';
-                            } else if (['josue', 'jueces', 'rut', '1samuel', '2samuel', '1reyes', '2reyes', '1cronicas', '2cronicas', 'esdras', 'nehemias', 'ester'].includes(bookId)) {
-                                category = 'Libros Históricos';
-                            } else if (['job', 'salmos', 'proverbios', 'eclesiastes', 'cantar'].includes(bookId)) {
-                                category = 'Libros Poéticos';
-                            } else if (['isaias', 'jeremias', 'lamentaciones', 'ezequiel', 'daniel'].includes(bookId)) {
-                                category = 'Profetas Mayores';
-                            } else if (['oseas', 'joel', 'amos', 'abdias', 'jonas', 'miqueas', 'nahum', 'habacuc', 'sofonias', 'hageo', 'zacarias', 'malaquias'].includes(bookId)) {
-                                category = 'Profetas Menores';
-                            }
-                        } else if (testamentName === 'Nuevo Testamento') {
-                            if (['mateo', 'marcos', 'lucas', 'juan'].includes(bookId)) {
-                                category = 'Evangelios';
-                            } else if (['hechos', 'romanos', '1corintios', '2corintios', 'galatas', 'efesios', 'filipenses', 'colosenses', '1tesalonicenses', '2tesalonicenses', '1timoteo', '2timoteo', 'tito', 'filemon'].includes(bookId)) {
-                                category = 'Hechos y Epístolas Paulinas';
-                            } else if (['hebreos', 'santiago', '1pedro', '2pedro', '1juan', '2juan', '3juan', 'judas'].includes(bookId)) {
-                                category = 'Epístolas Generales';
-                            } else if (bookId === 'apocalipsis') {
-                                category = 'Apocalipsis';
-                            }
+                            if (['genesis','exodo','levitico','numeros','deuteronomio'].includes(bookId)) category = 'Pentateuco';
                         }
-                        
-                        if (!booksByCategory[category]) {
-                            booksByCategory[category] = [];
-                        }
-                        booksByCategory[category].push({ id: bookId, name: bookName });
+                        if (!booksByCategory[category]) booksByCategory[category] = [];
+                        booksByCategory[category].push(`<li><a href="book.html?id=${bookId}">${bookName}</a></li>`);
                     }
-                    
-                    // Crear HTML de categorías
                     for (let category in booksByCategory) {
-                        booksHTML += `<div class="book-category">
-                            <h3>${category}</h3>
-                            <ul>`;
-                        
-                        for (let book of booksByCategory[category]) {
-                            booksHTML += `<li><a href="book.html?id=${book.id}">${book.name}</a></li>`;
-                        }
-                        
-                        booksHTML += `</ul></div>`;
+                        booksHTML += `<div class="book-category"><h3>${category}</h3><ul>${booksByCategory[category].join('')}</ul></div>`;
                     }
-                    
-                    if (testamentName === 'Antiguo Testamento') {
-                        document.getElementById('old-testament-books').innerHTML = booksHTML;
-                    } else {
-                        document.getElementById('new-testament-books').innerHTML = booksHTML;
-                    }
+                    if (testamentName === 'Antiguo Testamento') document.getElementById('old-testament-books').innerHTML = booksHTML;
+                    else document.getElementById('new-testament-books').innerHTML = booksHTML;
                 }
             })
             .catch(error => console.error('Error cargando XML:', error));
