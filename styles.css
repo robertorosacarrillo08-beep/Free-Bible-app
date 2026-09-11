@@ -72,6 +72,7 @@ header p {
     border-bottom-color: #6179ea;
 }
 
+.tab-button:focus,
 .tab-button:focus-visible {
     outline: 3px solid #1f1f1f;
     outline-offset: 2px;
@@ -80,14 +81,7 @@ header p {
 
 .tab-button:focus:not(:focus-visible) {
     outline: none;
-}
-
-@supports not selector(:focus-visible) {
-    .tab-button:focus {
-        outline: 3px solid #1f1f1f;
-        outline-offset: 2px;
-        box-shadow: 0 0 0 3px rgba(97, 121, 234, 0.35);
-    }
+    box-shadow: none;
 }
 
 .testament-section {
@@ -167,6 +161,7 @@ header p {
     text-decoration: underline;
 }
 
+.book-category a:focus,
 .book-category a:focus-visible {
     outline: 3px solid #1f1f1f;
     outline-offset: 2px;
@@ -176,15 +171,7 @@ header p {
 
 .book-category a:focus:not(:focus-visible) {
     outline: none;
-}
-
-@supports not selector(:focus-visible) {
-    .book-category a:focus {
-        outline: 3px solid #1f1f1f;
-        outline-offset: 2px;
-        border-radius: 5px;
-        box-shadow: 0 0 0 3px rgba(97, 121, 234, 0.35);
-    }
+    box-shadow: none;
 }
 
 @media (max-width: 700px) {
