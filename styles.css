@@ -73,8 +73,9 @@ header p {
 }
 
 .tab-button:focus-visible {
-    outline: 3px solid #6179ea;
+    outline: 3px solid #1f1f1f;
     outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(97, 121, 234, 0.35);
 }
 
 .tab-button:focus:not(:focus-visible) {
@@ -83,8 +84,9 @@ header p {
 
 @supports not selector(:focus-visible) {
     .tab-button:focus {
-        outline: 3px solid #6179ea;
+        outline: 3px solid #1f1f1f;
         outline-offset: 2px;
+        box-shadow: 0 0 0 3px rgba(97, 121, 234, 0.35);
     }
 }
 
