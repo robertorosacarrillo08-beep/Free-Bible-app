@@ -258,7 +258,7 @@ const BibleApp = (() => {
 
     function renderChapter(bookName, chapter, versesContainer) {
         if (!chapter) {
-            versesContainer.innerHTML = '<p>No se encontró el capítulo solicitado.</p>';
+            renderError(versesContainer, 'No se encontró el capítulo solicitado.');
             return;
         }
 

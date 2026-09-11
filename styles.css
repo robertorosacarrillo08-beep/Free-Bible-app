@@ -108,6 +108,11 @@ header p {
     outline: 2px solid rgba(102, 126, 234, 0.25);
     border-color: #667eea;
 }
+.search-help {
+    margin-top: 10px;
+    color: #666;
+    font-size: 0.9rem;
+}
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
