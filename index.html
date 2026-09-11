@@ -87,6 +87,9 @@
                     }
 
                     const container = document.getElementById(target.containerId);
+                    if (!container) {
+                        continue;
+                    }
                     container.innerHTML = '';
 
                     const books = Array.from(testament.getElementsByTagName('book')).map(book => ({

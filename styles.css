@@ -140,7 +140,7 @@ header p {
 .book-category a {
     color: #5b3b9b;
     text-decoration: none;
-    font-size: clamp(1.95rem, 6vw, 2.95rem);
+    font-size: clamp(1.6rem, 4.2vw, 2.25rem);
     font-weight: 500;
 }
 
