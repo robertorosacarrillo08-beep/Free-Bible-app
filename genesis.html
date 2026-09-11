@@ -1,189 +1,31 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-redirect-target="book.html?id=genesis">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Génesis - Free Bible App</title>
     <link rel="stylesheet" href="styles.css">
+    <noscript>
+        <meta http-equiv="refresh" content="1; url=book.html?id=genesis">
+    </noscript>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header>
             <h1>📖 Free Bible App</h1>
             <p>Tu acceso gratuito a la Biblia en cualquier momento y lugar</p>
         </header>
-
-        <!-- Back to Home Button -->
         <div style="padding: 20px;">
-            <a href="index.html" class="back-link">← Volver a Inicio</a>
+            <a id="legacy-redirect-link" href="book.html?id=genesis" class="back-link">Continuar a Génesis</a>
         </div>
-
-        <!-- Book Header -->
-        <div class="book-header">
-            <h1>Génesis</h1>
-            <p>Primer libro de la Biblia</p>
-        </div>
-
-        <!-- Chapter Selector -->
         <div class="book-content">
-            <div class="chapter-selector">
-                <label for="chapter-select">Selecciona un capítulo:</label>
-                <select id="chapter-select" onchange="showChapter(this.value)">
-                    <option value="">-- Selecciona un capítulo --</option>
-                    <option value="1">Capítulo 1</option>
-                    <option value="2">Capítulo 2</option>
-                    <option value="3">Capítulo 3</option>
-                    <option value="4">Capítulo 4</option>
-                    <option value="5">Capítulo 5</option>
-                </select>
-            </div>
-
-            <!-- Capítulo 1 -->
-            <div id="chapter-1" class="chapter-content" style="display:none;">
-                <h2>Génesis - Capítulo 1</h2>
-                <div class="verse">
-                    <span class="verse-number">1</span>
-                    <span class="verse-text">En el principio creó Dios los cielos y la tierra.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">2</span>
-                    <span class="verse-text">Y la tierra estaba desordenada y vacía, y las tinieblas estaban sobre la faz del abismo, y el Espíritu de Dios se movía sobre la faz de las aguas.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">3</span>
-                    <span class="verse-text">Y dijo Dios: Sea la luz; y fue la luz.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">4</span>
-                    <span class="verse-text">Y vio Dios que la luz era buena; y separó Dios la luz de las tinieblas.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">5</span>
-                    <span class="verse-text">Y llamó Dios a la luz Día, y a las tinieblas llamó Noche. Y fue la tarde y la mañana un día.</span>
-                </div>
-            </div>
-
-            <!-- Capítulo 2 -->
-            <div id="chapter-2" class="chapter-content" style="display:none;">
-                <h2>Génesis - Capítulo 2</h2>
-                <div class="verse">
-                    <span class="verse-number">1</span>
-                    <span class="verse-text">Fueron, pues, acabados los cielos y la tierra, y todo el ejército de ellos.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">2</span>
-                    <span class="verse-text">Y acabó Dios en el día séptimo la obra que hizo; y reposó el día séptimo de toda la obra que hizo.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">3</span>
-                    <span class="verse-text">Y bendijo Dios al día séptimo, y lo santificó, porque en él reposó de toda la obra que había hecho en la creación.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">4</span>
-                    <span class="verse-text">Estos son los orígenes de los cielos y de la tierra cuando fueron creados, en el día que Jehová Dios hizo la tierra y los cielos.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">5</span>
-                    <span class="verse-text">Y toda planta del campo antes que fuese en la tierra, y toda hierba del campo antes que naciese; porque Jehová Dios aún no había hecho llover sobre la tierra, ni había hombre para que labrase la tierra.</span>
-                </div>
-            </div>
-
-            <!-- Capítulo 3 -->
-            <div id="chapter-3" class="chapter-content" style="display:none;">
-                <h2>Génesis - Capítulo 3</h2>
-                <div class="verse">
-                    <span class="verse-number">1</span>
-                    <span class="verse-text">Ahora bien, la serpiente era astuta, más que todos los animales del campo que Jehová Dios había hecho; y dijo a la mujer: ¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">2</span>
-                    <span class="verse-text">Y la mujer respondió a la serpiente: Del fruto de los árboles del huerto podemos comer;</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">3</span>
-                    <span class="verse-text">mas del fruto del árbol que está en medio del huerto dijo Dios: No comeréis de él, ni le tocaréis, para que no muráis.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">4</span>
-                    <span class="verse-text">Entonces la serpiente dijo a la mujer: No moriréis;</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">5</span>
-                    <span class="verse-text">sino que sabe Dios que el día que comáis de él, serán abiertos vuestros ojos, y seréis como Dios, sabiendo el bien y el mal.</span>
-                </div>
-            </div>
-
-            <!-- Capítulo 4 -->
-            <div id="chapter-4" class="chapter-content" style="display:none;">
-                <h2>Génesis - Capítulo 4</h2>
-                <div class="verse">
-                    <span class="verse-number">1</span>
-                    <span class="verse-text">Conoció Adán a su mujer Eva, la cual concibió y parió a Caín, y dijo: Por la ayuda de Jehová he adquirido varón.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">2</span>
-                    <span class="verse-text">Después parió a su hermano Abel. Y Abel fue pastor de ovejas, y Caín fue labrador de la tierra.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">3</span>
-                    <span class="verse-text">Y aconteció andando el tiempo, que Caín trajo del fruto de la tierra una ofrenda a Jehová.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">4</span>
-                    <span class="verse-text">Y Abel trajo también de los primogénitos de sus ovejas, de lo más gordo de ellas. Y miró Jehová con agrado a Abel y a su ofrenda;</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">5</span>
-                    <span class="verse-text">mas no miró con agrado a Caín y a la ofrenda suya. Y se ensañó Caín en gran manera, y decayó su semblante.</span>
-                </div>
-            </div>
-
-            <!-- Capítulo 5 -->
-            <div id="chapter-5" class="chapter-content" style="display:none;">
-                <h2>Génesis - Capítulo 5</h2>
-                <div class="verse">
-                    <span class="verse-number">1</span>
-                    <span class="verse-text">Este es el libro de los orígenes de Adán. El día en que creó Dios al hombre, a semejanza de Dios lo hizo.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">2</span>
-                    <span class="verse-text">Varón y hembra los creó; y los bendijo, y llamó el nombre de ellos Adán, en el día en que fueron creados.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">3</span>
-                    <span class="verse-text">Y vivió Adán ciento treinta años, y engendró un hijo a su semejanza, conforme a su imagen, y llamó su nombre Set.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">4</span>
-                    <span class="verse-text">Y fueron los días de Adán después que engendró a Set, ochocientos años, y engendró hijos e hijas.</span>
-                </div>
-                <div class="verse">
-                    <span class="verse-number">5</span>
-                    <span class="verse-text">Y fueron todos los días que Adán vivió novecientos treinta años; y murió.</span>
-                </div>
-            </div>
+            <p id="legacy-redirect-message">Redirigiendo a la lectura de Génesis...</p>
+            <noscript><p>Si la redirección no ocurre automáticamente, usa el enlace anterior.</p></noscript>
         </div>
     </div>
-
     <script src="script.js"></script>
     <script>
-        function showChapter(chapterNum) {
-            // Ocultar todos los capítulos
-            const chapters = document.querySelectorAll('.chapter-content');
-            chapters.forEach(chapter => {
-                chapter.style.display = 'none';
-            });
-
-            // Mostrar el capítulo seleccionado
-            if (chapterNum) {
-                const selectedChapter = document.getElementById('chapter-' + chapterNum);
-                if (selectedChapter) {
-                    selectedChapter.style.display = 'block';
-                    selectedChapter.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        }
+        BibleApp.renderLegacyRedirect();
     </script>
 </body>
 </html>

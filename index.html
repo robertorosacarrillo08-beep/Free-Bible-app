@@ -12,6 +12,37 @@
             <h1>📖 Free Bible App</h1>
             <p>Tu acceso gratuito a la Biblia en cualquier momento y lugar</p>
         </header>
+        <section class="home-hero">
+            <div>
+                <span class="hero-badge">Lectura en línea</span>
+                <h2>Explora la Biblia por libro y capítulo</h2>
+                <p>Encuentra rápidamente el libro que buscas y continúa tu lectura desde una sola página principal.</p>
+            </div>
+            <div class="hero-actions">
+                <a href="book.html?id=genesis" class="hero-link">Comenzar en Génesis</a>
+            </div>
+        </section>
+        <section class="home-tools">
+            <div class="search-card">
+                <label for="book-search">Buscar libro:</label>
+                <input id="book-search" type="search" placeholder="Escribe un libro de la Biblia" autocomplete="off" aria-describedby="book-search-help">
+                <p id="book-search-help" class="search-help">Ejemplo: Génesis, Juan, Romanos.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <strong id="total-books">0</strong>
+                    <span>Libros</span>
+                </div>
+                <div class="stat-card">
+                    <strong id="old-books-count">0</strong>
+                    <span>Antiguo Testamento</span>
+                </div>
+                <div class="stat-card">
+                    <strong id="new-books-count">0</strong>
+                    <span>Nuevo Testamento</span>
+                </div>
+            </div>
+        </section>
         <div class="tabs">
             <button class="tab-button active" onclick="showTestament('old')">Antiguo Testamento</button>
             <button class="tab-button" onclick="showTestament('new')">Nuevo Testamento</button>
@@ -19,43 +50,17 @@
         <section id="old-testament" class="testament-section active">
             <h2>Antiguo Testamento</h2>
             <div class="books-grid" id="old-testament-books"></div>
+            <p id="old-empty-state" class="empty-state" hidden>No se encontraron libros con esa búsqueda.</p>
         </section>
         <section id="new-testament" class="testament-section">
             <h2>Nuevo Testamento</h2>
             <div class="books-grid" id="new-testament-books"></div>
+            <p id="new-empty-state" class="empty-state" hidden>No se encontraron libros con esa búsqueda.</p>
         </section>
     </div>
     <script src="script.js"></script>
     <script>
-        fetch('bible.xml')
-            .then(response => response.text())
-            .then(xmlText => {
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-                const testaments = xmlDoc.getElementsByTagName('testament');
-                for (let testament of testaments) {
-                    const testamentName = testament.getAttribute('name');
-                    const books = testament.getElementsByTagName('book');
-                    let booksHTML = '';
-                    const booksByCategory = {};
-                    for (let book of books) {
-                        const bookId = book.getAttribute('id');
-                        const bookName = book.getAttribute('name');
-                        let category = 'Otros';
-                        if (testamentName === 'Antiguo Testamento') {
-                            if (['genesis','exodo','levitico','numeros','deuteronomio'].includes(bookId)) category = 'Pentateuco';
-                        }
-                        if (!booksByCategory[category]) booksByCategory[category] = [];
-                        booksByCategory[category].push(`<li><a href="book.html?id=${bookId}">${bookName}</a></li>`);
-                    }
-                    for (let category in booksByCategory) {
-                        booksHTML += `<div class="book-category"><h3>${category}</h3><ul>${booksByCategory[category].join('')}</ul></div>`;
-                    }
-                    if (testamentName === 'Antiguo Testamento') document.getElementById('old-testament-books').innerHTML = booksHTML;
-                    else document.getElementById('new-testament-books').innerHTML = booksHTML;
-                }
-            })
-            .catch(error => console.error('Error cargando XML:', error));
+        BibleApp.renderIndex();
     </script>
 </body>
 </html>
