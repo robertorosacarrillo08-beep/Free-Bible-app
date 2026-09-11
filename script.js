@@ -86,12 +86,20 @@ const BibleApp = (() => {
     function createBookLink(book) {
         const bookId = book.getAttribute('id');
         const bookName = book.getAttribute('name');
-        return `<li><a href="book.html?id=${encodeURIComponent(bookId)}">${bookName}</a></li>`;
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `book.html?id=${encodeURIComponent(bookId)}`;
+        link.textContent = bookName;
+        listItem.appendChild(link);
+        return listItem;
     }
 
     function renderError(container, message) {
         if (container) {
-            container.innerHTML = `<p>${message}</p>`;
+            container.replaceChildren();
+            const paragraph = document.createElement('p');
+            paragraph.textContent = message;
+            container.appendChild(paragraph);
         }
     }
 
@@ -106,20 +114,36 @@ const BibleApp = (() => {
                 Array.from(xmlDoc.getElementsByTagName('testament')).forEach(testament => {
                     const testamentName = testament.getAttribute('name');
                     const books = Array.from(testament.getElementsByTagName('book'));
-                    const testamentKey = testamentName === 'Antiguo Testamento' ? 'old' : 'new';
-                    const groups = groupBooks(testamentKey, books);
-                    const booksHtml = Object.keys(groups)
-                        .map(categoryKey => `
-                            <div class="book-category">
-                                <h3>${categoryLabels[categoryKey]}</h3>
-                                <ul>${groups[categoryKey].map(createBookLink).join('')}</ul>
-                            </div>
-                        `)
-                        .join('');
+                    const testamentKey = testamentName === 'Antiguo Testamento'
+                        ? 'old'
+                        : testamentName === 'Nuevo Testamento'
+                            ? 'new'
+                            : null;
 
-                    if (testamentSections[testamentName]) {
-                        testamentSections[testamentName].innerHTML = booksHtml;
+                    if (!testamentKey || !testamentSections[testamentName]) {
+                        console.warn('Testamento no reconocido:', testamentName);
+                        return;
                     }
+
+                    const groups = groupBooks(testamentKey, books);
+                    const fragment = document.createDocumentFragment();
+
+                    Object.keys(groups).forEach(categoryKey => {
+                        const category = document.createElement('div');
+                        category.className = 'book-category';
+
+                        const heading = document.createElement('h3');
+                        heading.textContent = categoryLabels[categoryKey];
+                        category.appendChild(heading);
+
+                        const list = document.createElement('ul');
+                        groups[categoryKey].forEach(book => list.appendChild(createBookLink(book)));
+                        category.appendChild(list);
+
+                        fragment.appendChild(category);
+                    });
+
+                    testamentSections[testamentName].replaceChildren(fragment);
                 });
             })
             .catch(error => {
@@ -141,15 +165,29 @@ const BibleApp = (() => {
         }
 
         const verses = Array.from(chapter.getElementsByTagName('verse')).filter(verse => verse.textContent.trim());
-        versesContainer.innerHTML = `
-            <h2>${bookName} - Capítulo ${chapter.getAttribute('number')}</h2>
-            ${verses.map(verse => `
-                <div class="verse">
-                    <span class="verse-number">${verse.getAttribute('number')}</span>
-                    <span class="verse-text">${verse.textContent}</span>
-                </div>
-            `).join('')}
-        `;
+        const fragment = document.createDocumentFragment();
+        const heading = document.createElement('h2');
+        heading.textContent = `${bookName} - Capítulo ${chapter.getAttribute('number')}`;
+        fragment.appendChild(heading);
+
+        verses.forEach(verse => {
+            const verseElement = document.createElement('div');
+            verseElement.className = 'verse';
+
+            const verseNumber = document.createElement('span');
+            verseNumber.className = 'verse-number';
+            verseNumber.textContent = verse.getAttribute('number');
+
+            const verseText = document.createElement('span');
+            verseText.className = 'verse-text';
+            verseText.textContent = verse.textContent;
+
+            verseElement.appendChild(verseNumber);
+            verseElement.appendChild(verseText);
+            fragment.appendChild(verseElement);
+        });
+
+        versesContainer.replaceChildren(fragment);
         window.scrollTo(0, 0);
     }
 
