@@ -78,7 +78,7 @@ const BibleApp = (() => {
         return biblePromise;
     }
 
-    function groupBooks(testamentKey, books) {
+    function groupBooks(books) {
         const grouped = {};
         books.forEach(book => {
             const bookId = book.getAttribute('id');
@@ -133,10 +133,14 @@ const BibleApp = (() => {
                         return;
                     }
 
-                    const groups = groupBooks(testamentKey, books);
+                    const groups = groupBooks(books);
                     const fragment = document.createDocumentFragment();
+                    const orderedCategoryKeys = [
+                        ...Object.keys(categories[testamentKey]).filter(categoryKey => groups[categoryKey]),
+                        ...Object.keys(groups).filter(categoryKey => !categories[testamentKey][categoryKey])
+                    ];
 
-                    Object.keys(groups).forEach(categoryKey => {
+                    orderedCategoryKeys.forEach(categoryKey => {
                         const category = document.createElement('div');
                         category.className = 'book-category';
 
@@ -228,7 +232,12 @@ const BibleApp = (() => {
                 document.title = `${bookName} - Free Bible App`;
                 bookTitle.textContent = bookName;
                 bookInfo.textContent = `Total de capítulos: ${totalChapters}`;
-                chapterSelect.innerHTML = '<option value="">-- Selecciona un capítulo --</option>';
+                chapterSelect.replaceChildren();
+
+                const placeholderOption = document.createElement('option');
+                placeholderOption.value = '';
+                placeholderOption.textContent = '-- Selecciona un capítulo --';
+                chapterSelect.appendChild(placeholderOption);
 
                 chapters.forEach(chapter => {
                     const chapterNumber = chapter.getAttribute('number');
