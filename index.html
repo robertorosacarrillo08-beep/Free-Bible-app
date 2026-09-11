@@ -33,26 +33,64 @@
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
                 const testaments = xmlDoc.getElementsByTagName('testament');
+                const categoryConfig = {
+                    old: [
+                        { title: 'Pentateuco', ids: ['genesis', 'exodo', 'levitico', 'numeros', 'deuteronomio'] },
+                        { title: 'Libros Históricos', ids: ['josue', 'jueces', 'rut', '1samuel', '2samuel', '1reyes', '2reyes', '1cronicas', '2cronicas', 'esdras', 'nehemias', 'ester'] },
+                        { title: 'Libros Poéticos', ids: ['job', 'salmos', 'proverbios', 'eclesiastes', 'cantares'] },
+                        { title: 'Profetas Mayores', ids: ['isaias', 'jeremias', 'lamentaciones', 'ezequiel', 'daniel'] },
+                        { title: 'Profetas Menores', ids: ['oseas', 'joel', 'amos', 'abdias', 'jonas', 'miqueas', 'nahum', 'habacuc', 'sofonias', 'hageo', 'zacarias', 'malaquias'] }
+                    ],
+                    new: [
+                        { title: 'Evangelios', ids: ['mateo', 'marcos', 'lucas', 'juan'] },
+                        { title: 'Historia', ids: ['hechos'] },
+                        { title: 'Cartas Paulinas', ids: ['romanos', '1corintios', '2corintios', 'galatas', 'efesios', 'filipenses', 'colosenses', '1tesalonicenses', '2tesalonicenses', '1timoteo', '2timoteo', 'tito', 'filemon'] },
+                        { title: 'Cartas Generales', ids: ['hebreos', 'santiago', '1pedro', '2pedro', '1juan', '2juan', '3juan', 'judas'] },
+                        { title: 'Profecía', ids: ['apocalipsis'] }
+                    ]
+                };
+
                 for (let testament of testaments) {
                     const testamentName = testament.getAttribute('name');
-                    const books = testament.getElementsByTagName('book');
+                    const books = Array.from(testament.getElementsByTagName('book'));
+                    const testamentKey = testamentName === 'Antiguo Testamento' ? 'old' : 'new';
+                    const booksById = new Map();
+                    books.forEach(book => {
+                        booksById.set(book.getAttribute('id'), {
+                            id: book.getAttribute('id'),
+                            name: book.getAttribute('name')
+                        });
+                    });
+
                     let booksHTML = '';
-                    const booksByCategory = {};
-                    for (let book of books) {
-                        const bookId = book.getAttribute('id');
-                        const bookName = book.getAttribute('name');
-                        let category = 'Otros';
-                        if (testamentName === 'Antiguo Testamento') {
-                            if (['genesis','exodo','levitico','numeros','deuteronomio'].includes(bookId)) category = 'Pentateuco';
+                    const usedIds = new Set();
+                    categoryConfig[testamentKey].forEach(category => {
+                        const categoryBooks = category.ids
+                            .filter(bookId => booksById.has(bookId))
+                            .map(bookId => {
+                                usedIds.add(bookId);
+                                const book = booksById.get(bookId);
+                                return `<li><a href="book.html?id=${book.id}">${book.name}</a></li>`;
+                            });
+
+                        if (categoryBooks.length > 0) {
+                            booksHTML += `<article class="book-category"><h3>${category.title}</h3><ul>${categoryBooks.join('')}</ul></article>`;
                         }
-                        if (!booksByCategory[category]) booksByCategory[category] = [];
-                        booksByCategory[category].push(`<li><a href="book.html?id=${bookId}">${bookName}</a></li>`);
+                    });
+
+                    const uncategorizedBooks = books
+                        .filter(book => !usedIds.has(book.getAttribute('id')))
+                        .map(book => `<li><a href="book.html?id=${book.getAttribute('id')}">${book.getAttribute('name')}</a></li>`);
+
+                    if (uncategorizedBooks.length > 0) {
+                        booksHTML += `<article class="book-category"><h3>Otros Libros</h3><ul>${uncategorizedBooks.join('')}</ul></article>`;
                     }
-                    for (let category in booksByCategory) {
-                        booksHTML += `<div class="book-category"><h3>${category}</h3><ul>${booksByCategory[category].join('')}</ul></div>`;
+
+                    if (testamentName === 'Antiguo Testamento') {
+                        document.getElementById('old-testament-books').innerHTML = booksHTML;
+                    } else {
+                        document.getElementById('new-testament-books').innerHTML = booksHTML;
                     }
-                    if (testamentName === 'Antiguo Testamento') document.getElementById('old-testament-books').innerHTML = booksHTML;
-                    else document.getElementById('new-testament-books').innerHTML = booksHTML;
                 }
             })
             .catch(error => console.error('Error cargando XML:', error));
