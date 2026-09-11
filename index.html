@@ -33,6 +33,7 @@
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
                 const testaments = xmlDoc.getElementsByTagName('testament');
+
                 const categoryConfig = {
                     old: [
                         { title: 'Pentateuco', ids: ['genesis', 'exodo', 'levitico', 'numeros', 'deuteronomio'] },
@@ -50,46 +51,67 @@
                     ]
                 };
 
-                for (let testament of testaments) {
-                    const testamentName = testament.getAttribute('name');
-                    const books = Array.from(testament.getElementsByTagName('book'));
-                    const testamentKey = testamentName === 'Antiguo Testamento' ? 'old' : 'new';
-                    const booksById = new Map();
-                    books.forEach(book => {
-                        booksById.set(book.getAttribute('id'), {
-                            id: book.getAttribute('id'),
-                            name: book.getAttribute('name')
-                        });
-                    });
+                const testamentTargets = {
+                    'Antiguo Testamento': { key: 'old', containerId: 'old-testament-books' },
+                    'Nuevo Testamento': { key: 'new', containerId: 'new-testament-books' }
+                };
 
-                    let booksHTML = '';
+                const createBookListItem = (bookId, bookName) => {
+                    const li = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = `book.html?id=${encodeURIComponent(bookId)}`;
+                    link.textContent = bookName;
+                    li.appendChild(link);
+                    return li;
+                };
+
+                const createCategoryNode = (title, books) => {
+                    const category = document.createElement('article');
+                    category.className = 'book-category';
+                    const heading = document.createElement('h3');
+                    heading.textContent = title;
+                    const list = document.createElement('ul');
+                    books.forEach(book => {
+                        list.appendChild(createBookListItem(book.id, book.name));
+                    });
+                    category.appendChild(heading);
+                    category.appendChild(list);
+                    return category;
+                };
+
+                for (const testament of testaments) {
+                    const testamentName = testament.getAttribute('name');
+                    const target = testamentTargets[testamentName];
+                    if (!target) {
+                        continue;
+                    }
+
+                    const container = document.getElementById(target.containerId);
+                    container.innerHTML = '';
+
+                    const books = Array.from(testament.getElementsByTagName('book')).map(book => ({
+                        id: book.getAttribute('id') || '',
+                        name: book.getAttribute('name') || ''
+                    }));
+                    const booksById = new Map(books.map(book => [book.id, book]));
                     const usedIds = new Set();
-                    categoryConfig[testamentKey].forEach(category => {
+
+                    categoryConfig[target.key].forEach(category => {
                         const categoryBooks = category.ids
                             .filter(bookId => booksById.has(bookId))
                             .map(bookId => {
                                 usedIds.add(bookId);
-                                const book = booksById.get(bookId);
-                                return `<li><a href="book.html?id=${book.id}">${book.name}</a></li>`;
+                                return booksById.get(bookId);
                             });
 
                         if (categoryBooks.length > 0) {
-                            booksHTML += `<article class="book-category"><h3>${category.title}</h3><ul>${categoryBooks.join('')}</ul></article>`;
+                            container.appendChild(createCategoryNode(category.title, categoryBooks));
                         }
                     });
 
-                    const uncategorizedBooks = books
-                        .filter(book => !usedIds.has(book.getAttribute('id')))
-                        .map(book => `<li><a href="book.html?id=${book.getAttribute('id')}">${book.getAttribute('name')}</a></li>`);
-
+                    const uncategorizedBooks = books.filter(book => !usedIds.has(book.id));
                     if (uncategorizedBooks.length > 0) {
-                        booksHTML += `<article class="book-category"><h3>Otros Libros</h3><ul>${uncategorizedBooks.join('')}</ul></article>`;
-                    }
-
-                    if (testamentName === 'Antiguo Testamento') {
-                        document.getElementById('old-testament-books').innerHTML = booksHTML;
-                    } else {
-                        document.getElementById('new-testament-books').innerHTML = booksHTML;
+                        container.appendChild(createCategoryNode('Otros Libros', uncategorizedBooks));
                     }
                 }
             })
