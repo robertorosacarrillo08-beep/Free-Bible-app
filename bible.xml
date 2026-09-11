@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bible>
+    <testament name="Antiguo Testamento">
+        <book id="genesis" name="Génesis" chapters="50">
+            <chapter number="1">
+                <verse number="1">En el principio creó Dios los cielos y la tierra.</verse>
+                <verse number="2">Y la tierra estaba desordenada y vacía, y las tinieblas estaban sobre la faz del abismo, y el Espíritu de Dios se movía sobre la faz de las aguas.</verse>
+                <verse number="3">Y dijo Dios: Sea la luz; y fue la luz.</verse>
+                <verse number="4">Y vio Dios que la luz era buena; y separó Dios la luz de las tinieblas.</verse>
+                <verse number="5">Y llamó Dios a la luz Día, y a las tinieblas llamó Noche. Y fue la tarde y la mañana un día.</verse>
+            </chapter>
+            <chapter number="2">
+                <verse number="1">Fueron, pues, acabados los cielos y la tierra, y todo el ejército de ellos.</verse>
+                <verse number="2">Y acabó Dios en el día séptimo la obra que hizo; y reposó el día séptimo de toda la obra que hizo.</verse>
+                <verse number="3">Y bendijo Dios al día séptimo, y lo santificó, porque en él reposó de toda la obra que había hecho en la creación.</verse>
+                <verse number="4">Estos son los orígenes de los cielos y de la tierra cuando fueron creados, en el día que Jehová Dios hizo la tierra y los cielos.</verse>
+                <verse number="5">Y toda planta del campo antes que fuese en la tierra, y toda hierba del campo antes que naciese; porque Jehová Dios aún no había hecho llover sobre la tierra, ni había hombre para que labrase la tierra.</verse>
+            </chapter>
+            <chapter number="3">
+                <verse number="1">Ahora bien, la serpiente era astuta, más que todos los animales del campo que Jehová Dios había hecho; y dijo a la mujer: ¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?</verse>
+                <verse number="2">Y la mujer respondió a la serpiente: Del fruto de los árboles del huerto podemos comer;</verse>
+                <verse number="3">mas del fruto del árbol que está en medio del huerto dijo Dios: No comeréis de él, ni le tocaréis, para que no muráis.</verse>
+                <verse number="4">Entonces la serpiente dijo a la mujer: No moriréis;</verse>
+                <verse number="5">sino que sabe Dios que el día que comáis de él, serán abiertos vuestros ojos, y seréis como Dios, sabiendo el bien y el mal.</verse>
+            </chapter>
+        </book>
+        <book id="exodo" name="Éxodo" chapters="40">
+            <chapter number="1">
+                <verse number="1">Estos son los nombres de los hijos de Israel que entraron en Egipto con Jacob; cada uno entró con su familia.</verse>
+                <verse number="2">Rubén, Simeón, Leví y Judá;</verse>
+                <verse number="3">Isacar, Zabulón y Benjamín;</verse>
+                <verse number="4">Dan, Neftalí, Gad y Aser.</verse>
+                <verse number="5">Y todas las personas que salieron del muslo de Jacob fueron setenta; pues José estaba en Egipto.</verse>
+            </chapter>
+            <chapter number="2">
+                <verse number="1">Y sucedió que después de muchos días murió el rey de Egipto, y los hijos de Israel gimieron a causa de la servidumbre, y clamaron; y subió su clamor a Dios a causa de su servidumbre.</verse>
+                <verse number="2">Y oyó Dios el gemido de ellos, y se acordó de su pacto con Abraham, Isaac y Jacob.</verse>
+                <verse number="3">Y miró Dios a los hijos de Israel, y los conoció Dios.</verse>
+                <verse number="4">En aquel tiempo fue cuando Moisés estaba apacentando las ovejas de su suegro Jetro, sacerdote de Madián.</verse>
+                <verse number="5">Y llevó las ovejas a través del desierto, y llegó a Horeb, monte de Dios.</verse>
+            </chapter>
+        </book>
+        <book id="levitico" name="Levítico" chapters="27">
+            <chapter number="1">
+                <verse number="1">Llamó Jehová a Moisés, y habló con él desde el tabernáculo de reunión, diciendo:</verse>
+                <verse number="2">Habla a los hijos de Israel y diles: Cuando alguno de vosotros presente ofrenda a Jehová, de ganado vacuno u ovejas presentaréis vuestra ofrenda.</verse>
+                <verse number="3">Si su ofrenda fuere holocausto de vacas, macho sin defecto lo presentará; de su voluntad lo presentará a la puerta del tabernáculo de reunión delante de Jehová.</verse>
+                <verse number="4">Y pondrá su mano sobre la cabeza del holocausto, y será aceptado para hacer expiación por él.</verse>
+                <verse number="5">Entonces degollará el becerro delante de Jehová; y los sacerdotes hijos de Aarón presentarán la sangre y la rociarán alrededor sobre el altar que está a la puerta del tabernáculo de reunión.</verse>
+            </chapter>
+        </book>
+    </testament>
+    <testament name="Nuevo Testamento">
+        <book id="mateo" name="Mateo" chapters="28">
+            <chapter number="1">
+                <verse number="1">Libro de la genealogía de Jesucristo, hijo de David, hijo de Abraham.</verse>
+                <verse number="2">Abraham engendró a Isaac, Isaac a Jacob, y Jacob a Judá y a sus hermanos.</verse>
+                <verse number="3">Judá engendró a Fares y a Zara de Tamar; Fares engendró a Esrom, y Esrom a Aram.</verse>
+                <verse number="4">Aram engendró a Aminadab, Aminadab a Naasón, y Naasón a Salmón.</verse>
+                <verse number="5">Salmón engendró a Booz de Rahab; Booz engendró a Obed de Rut, y Obed a Isaí.</verse>
+            </chapter>
+        </book>
+        <book id="marcos" name="Marcos" chapters="16">
+            <chapter number="1">
+                <verse number="1">Principio del evangelio de Jesucristo, Hijo de Dios.</verse>
+                <verse number="2">Como está escrito en Isaías el profeta: He aquí, yo envío mi mensajero delante de ti, Que preparará tu camino.</verse>
+                <verse number="3">Voz del que clama en el desierto: Preparad el camino del Señor; Enderezad sus sendas.</verse>
+                <verse number="4">Bautizaba Juan en el desierto, y predicaba el bautismo de arrepentimiento para perdón de pecados.</verse>
+                <verse number="5">Y salía a él toda la provincia de Judea, y todos los de Jerusalén; y eran bautizados por él en el río Jordán, confesando sus pecados.</verse>
+            </chapter>
+        </book>
+    </testament>
+</bible>
