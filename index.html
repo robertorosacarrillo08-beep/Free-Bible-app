@@ -7,125 +7,160 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">📖 Free Bible App</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#download">Download</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📖 Free Bible App</h1>
+            <p>Tu acceso gratuito a la Biblia en cualquier momento y lugar</p>
+        </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Free Bible App</h1>
-                <p>Tu acceso gratuito a la Biblia en cualquier momento y lugar</p>
-                <button class="cta-button">Descargar Ahora</button>
+        <!-- Tabs for Testament Selection -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTestament('old')">Antiguo Testamento</button>
+            <button class="tab-button" onclick="showTestament('new')">Nuevo Testamento</button>
+        </div>
+
+        <!-- Antiguo Testamento Section -->
+        <section id="old-testament" class="testament-section active">
+            <h2>Antiguo Testamento</h2>
+            <div class="books-grid">
+                <!-- Libros del Pentateuco -->
+                <div class="book-category">
+                    <h3>Pentateuco</h3>
+                    <ul>
+                        <li><a href="#">Génesis</a></li>
+                        <li><a href="#">Éxodo</a></li>
+                        <li><a href="#">Levítico</a></li>
+                        <li><a href="#">Números</a></li>
+                        <li><a href="#">Deuteronomio</a></li>
+                    </ul>
+                </div>
+
+                <!-- Libros Históricos -->
+                <div class="book-category">
+                    <h3>Libros Históricos</h3>
+                    <ul>
+                        <li><a href="#">Josué</a></li>
+                        <li><a href="#">Jueces</a></li>
+                        <li><a href="#">Rut</a></li>
+                        <li><a href="#">1 Samuel</a></li>
+                        <li><a href="#">2 Samuel</a></li>
+                        <li><a href="#">1 Reyes</a></li>
+                        <li><a href="#">2 Reyes</a></li>
+                        <li><a href="#">1 Crónicas</a></li>
+                        <li><a href="#">2 Crónicas</a></li>
+                        <li><a href="#">Esdras</a></li>
+                        <li><a href="#">Nehemías</a></li>
+                        <li><a href="#">Ester</a></li>
+                    </ul>
+                </div>
+
+                <!-- Libros Poéticos -->
+                <div class="book-category">
+                    <h3>Libros Poéticos</h3>
+                    <ul>
+                        <li><a href="#">Job</a></li>
+                        <li><a href="#">Salmos</a></li>
+                        <li><a href="#">Proverbios</a></li>
+                        <li><a href="#">Eclesiastés</a></li>
+                        <li><a href="#">Cantar de los Cantares</a></li>
+                    </ul>
+                </div>
+
+                <!-- Profetas Mayores -->
+                <div class="book-category">
+                    <h3>Profetas Mayores</h3>
+                    <ul>
+                        <li><a href="#">Isaías</a></li>
+                        <li><a href="#">Jeremías</a></li>
+                        <li><a href="#">Lamentaciones</a></li>
+                        <li><a href="#">Ezequiel</a></li>
+                        <li><a href="#">Daniel</a></li>
+                    </ul>
+                </div>
+
+                <!-- Profetas Menores -->
+                <div class="book-category">
+                    <h3>Profetas Menores</h3>
+                    <ul>
+                        <li><a href="#">Oseas</a></li>
+                        <li><a href="#">Joel</a></li>
+                        <li><a href="#">Amós</a></li>
+                        <li><a href="#">Abdías</a></li>
+                        <li><a href="#">Jonás</a></li>
+                        <li><a href="#">Miqueas</a></li>
+                        <li><a href="#">Nahúm</a></li>
+                        <li><a href="#">Habacuc</a></li>
+                        <li><a href="#">Sofonías</a></li>
+                        <li><a href="#">Hageo</a></li>
+                        <li><a href="#">Zacarías</a></li>
+                        <li><a href="#">Malaquías</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2>Características Principales</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Búsqueda Rápida</h3>
-                    <p>Encuentra versículos al instante con nuestra búsqueda poderosa</p>
+        <!-- Nuevo Testamento Section -->
+        <section id="new-testament" class="testament-section">
+            <h2>Nuevo Testamento</h2>
+            <div class="books-grid">
+                <!-- Evangelios -->
+                <div class="book-category">
+                    <h3>Evangelios</h3>
+                    <ul>
+                        <li><a href="#">Mateo</a></li>
+                        <li><a href="#">Marcos</a></li>
+                        <li><a href="#">Lucas</a></li>
+                        <li><a href="#">Juan</a></li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Acceso Offline</h3>
-                    <p>Lee la Biblia sin conexión a internet</p>
+
+                <!-- Hechos y Epístolas Paulinas -->
+                <div class="book-category">
+                    <h3>Hechos y Epístolas Paulinas</h3>
+                    <ul>
+                        <li><a href="#">Hechos</a></li>
+                        <li><a href="#">Romanos</a></li>
+                        <li><a href="#">1 Corintios</a></li>
+                        <li><a href="#">2 Corintios</a></li>
+                        <li><a href="#">Gálatas</a></li>
+                        <li><a href="#">Efesios</a></li>
+                        <li><a href="#">Filipenses</a></li>
+                        <li><a href="#">Colosenses</a></li>
+                        <li><a href="#">1 Tesalonicenses</a></li>
+                        <li><a href="#">2 Tesalonicenses</a></li>
+                        <li><a href="#">1 Timoteo</a></li>
+                        <li><a href="#">2 Timoteo</a></li>
+                        <li><a href="#">Tito</a></li>
+                        <li><a href="#">Filemón</a></li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Personalizable</h3>
-                    <p>Ajusta tamaño de fuente, temas y más según tu preferencia</p>
+
+                <!-- Epístolas Generales -->
+                <div class="book-category">
+                    <h3>Epístolas Generales</h3>
+                    <ul>
+                        <li><a href="#">Hebreos</a></li>
+                        <li><a href="#">Santiago</a></li>
+                        <li><a href="#">1 Pedro</a></li>
+                        <li><a href="#">2 Pedro</a></li>
+                        <li><a href="#">1 Juan</a></li>
+                        <li><a href="#">2 Juan</a></li>
+                        <li><a href="#">3 Juan</a></li>
+                        <li><a href="#">Judas</a></li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h3>Múltiples Versiones</h3>
-                    <p>Acceso a diferentes traducciones de la Biblia</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⭐</div>
-                    <h3>Favoritos</h3>
-                    <p>Guarda tus versículos favoritos para lectura rápida</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🆓</div>
-                    <h3>100% Gratuito</h3>
-                    <p>Sin suscripciones, sin anuncios, completamente libre</p>
+
+                <!-- Apocalipsis -->
+                <div class="book-category">
+                    <h3>Apocalipsis</h3>
+                    <ul>
+                        <li><a href="#">Apocalipsis</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section id="download" class="download">
-        <div class="container">
-            <h2>Descargar Ahora</h2>
-            <p>Disponible en todas las plataformas principales</p>
-            <div class="download-buttons">
-                <a href="#" class="download-btn ios">
-                    <span>📱</span>
-                    <div>
-                        <p>Descargar en</p>
-                        <p class="platform">iOS</p>
-                    </div>
-                </a>
-                <a href="#" class="download-btn android">
-                    <span>🤖</span>
-                    <div>
-                        <p>Descargar en</p>
-                        <p class="platform">Android</p>
-                    </div>
-                </a>
-                <a href="#" class="download-btn web">
-                    <span>💻</span>
-                    <div>
-                        <p>Usar en</p>
-                        <p class="platform">Web</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contacto</h2>
-            <p>¿Preguntas o sugerencias? Nos encantaría escucharte</p>
-            <form class="contact-form">
-                <input type="text" placeholder="Tu nombre" required>
-                <input type="email" placeholder="Tu correo electrónico" required>
-                <textarea placeholder="Tu mensaje" rows="5" required></textarea>
-                <button type="submit" class="submit-btn">Enviar Mensaje</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Free Bible App. Todos los derechos reservados.</p>
-            <div class="social-links">
-                <a href="#" title="Facebook">f</a>
-                <a href="#" title="Twitter">𝕏</a>
-                <a href="#" title="Instagram">📷</a>
-            </div>
-        </div>
-    </footer>
+        </section>
+    </div>
 
     <script src="script.js"></script>
 </body>
